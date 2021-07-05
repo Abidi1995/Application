@@ -1,4 +1,5 @@
-using Ecommerce.WebLayer.Data;
+
+using EcommerceDatabaseLayer2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,11 +28,8 @@ namespace Ecommerce.WebLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<EcomContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ecomconnection")));
+           
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
